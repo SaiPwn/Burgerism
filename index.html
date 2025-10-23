@@ -6,10 +6,9 @@
   <title>Burgerism — The Sacred Way of the Cheeseburger</title>
   <meta name="description" content="Burgerism is a gentle, good-humoured religion and way of life that finds meaning in balance, gratitude, and the sacred stack." />
   <meta name="theme-color" content="#f59e0b" />
-  <meta name="color-scheme" content="dark light" />
   <meta property="og:title" content="Burgerism — The Sacred Way of the Cheeseburger" />
   <meta property="og:description" content="A kind, tongue-in-cheek religion/way of life grounded in buns, balance, and community." />
-  <!-- For best results, replace this data URL with a real hosted image later -->
+  <meta property="og:type" content="website" />
   <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='100%25' height='100%25' fill='%23f59e0b'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-family='Arial' font-size='84' fill='white'%3EBURGERISM%3C/text%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' font-family='Arial' font-size='36' fill='white'%3EThe Sacred Way of the Cheeseburger%3C/text%3E%3C/svg%3E" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='28' width='48' height='10' rx='5' fill='%23965a38'/%3E%3Crect x='10' y='22' width='44' height='10' rx='5' fill='%23f59e0b'/%3E%3Crect x='8' y='18' width='48' height='8' rx='6' fill='%23d1a37a'/%3E%3Crect x='8' y='38' width='48' height='8' rx='6' fill='%23d1a37a'/%3E%3C/svg%3E"/>
 
@@ -17,7 +16,6 @@
     :root{
       --bg:#0e0f11; --fg:#e8e8e8; --muted:#b9b9c0; --accent:#f59e0b; --accent-2:#16a34a;
       --card:#121316; --card-2:#17181c; --ring: rgba(245, 158, 11, .35);
-      --border: rgba(255,255,255,.06);
     }
     *{box-sizing:border-box}
     html,body{margin:0}
@@ -31,13 +29,7 @@
     }
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
-    :focus-visible{outline:2px solid var(--accent); outline-offset:3px}
-
-    /* Skip link */
-    .skip{position:absolute;left:-9999px;top:auto}
-    .skip:focus{left:12px;top:12px;background:#000;color:#fff;padding:8px 12px;border-radius:8px;z-index:1000}
-
-    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(120%) blur(8px);background:linear-gradient(to bottom, rgba(14,15,17,.9), rgba(14,15,17,.55));border-bottom:1px solid var(--border)}
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(120%) blur(8px);background:linear-gradient(to bottom, rgba(14,15,17,.9), rgba(14,15,17,.55));border-bottom:1px solid rgba(255,255,255,.06)}
     .nav{max-width:1100px;margin:0 auto;display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 20px}
     .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.5px}
     .brand .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 210deg, var(--accent), #ca8a04 55%, #a16207 100%);box-shadow:0 0 0 4px rgba(245,158,11,.15);position:relative}
@@ -51,47 +43,55 @@
     .btn-ghost{background:transparent}
 
     .hero{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;padding:60px 20px 30px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:0 10px 40px -20px rgba(0,0,0,.5)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:22px;box-shadow:0 10px 40px -20px rgba(0,0,0,.5)}
     .tag{display:inline-flex;align-items:center;gap:8px;background:rgba(245,158,11,.14);color:#fff;border:1px solid rgba(245,158,11,.3);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
     h1{font-size:clamp(36px, 5vw, 56px);line-height:1.05;margin:12px 0 8px}
     .lead{font-size:18px;color:var(--muted)}
     .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
-    .kpi{background:var(--card-2);padding:14px;border-radius:14px;border:1px solid var(--border);text-align:center}
+    .kpi{background:var(--card-2);padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,.06);text-align:center}
     .kpi .n{font-weight:900;font-size:28px}
     .kpi .l{font-size:12px;color:var(--muted)}
 
     .panel-title{font-size:22px;margin:0 0 8px}
     .rituals{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .ritual{background:var(--card);padding:14px;border-radius:14px;border:1px solid var(--border)}
+    .ritual{background:var(--card);padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,.06)}
 
     section{max-width:1100px;margin:40px auto;padding:0 20px}
     .section-title{font-size:28px;margin:0 0 12px}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 
-    .commandment{background:var(--card);border:1px solid var(--border);padding:16px;border-radius:14px}
+    .commandment{background:var(--card);border:1px solid rgba(255,255,255,.06);padding:16px;border-radius:14px}
     .commandment .idx{font-weight:800;color:var(--accent)}
 
     .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
-    .tile{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--card-2)}
-    .tile img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:1/1}
-    .tile figcaption{position:absolute;inset:auto 8px 6px; font-size:12px;color:#fff;background:rgba(0,0,0,.35);padding:4px 6px;border-radius:8px}
+    .tile{aspect-ratio:1/1;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.06);background:var(--card-2);position:relative}
+    .tile svg{width:100%;height:100%;display:block}
+    .tile span{position:absolute;inset:auto 8px 6px; font-size:12px;color:#fff;background:rgba(0,0,0,.35);padding:4px 6px;border-radius:8px}
 
-    .faq details{background:var(--card);border:1px solid var(--border);padding:14px;border-radius:14px}
+    .faq details{background:var(--card);border:1px solid rgba(255,255,255,.06);padding:14px;border-radius:14px}
     .faq details+details{margin-top:10px}
     .faq summary{cursor:pointer;font-weight:700}
     .footer{max-width:1100px;margin:30px auto 60px;padding:0 20px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
     .floating{position:fixed;inset:auto 10px 10px auto;display:flex;gap:8px;align-items:center}
-    .toggle{width:42px;height:28px;border-radius:999px;background:#1b1d22;border:1px solid var(--border);position:relative}
+    .toggle{width:42px;height:28px;border-radius:999px;background:#1b1d22;border:1px solid rgba(255,255,255,.06);position:relative}
     .toggle input{display:none}
     .toggle .dot{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:all .2s}
     .toggle input:checked + .dot{left:17px;background:gold}
 
-    input, textarea{
-      width:100%;margin:6px 0 10px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1013;color:#fff
+    /* Easter-egg bubble */
+    .egg{
+      position:fixed; right:14px; bottom:14px; max-width:340px; z-index:70;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.08); color:#eaeaea; padding:14px 16px;
+      border-radius:14px; box-shadow:0 14px 50px -20px rgba(0,0,0,.6);
+      transform:translateY(10px); opacity:0; pointer-events:none; transition:.18s ease;
     }
+    .egg.show{transform:translateY(0); opacity:1; pointer-events:auto}
+    .egg .x{cursor:pointer; float:right; opacity:.7}
+    .egg .x:hover{opacity:1}
 
     @media (max-width: 900px){
       .hero{grid-template-columns:1fr;gap:16px;padding-top:30px}
@@ -104,39 +104,37 @@
   </style>
 </head>
 <body>
-  <a href="#main" class="skip">Skip to content</a>
   <canvas id="confetti" style="position:fixed;inset:0;pointer-events:none;z-index:40"></canvas>
-
-  <header role="banner">
-    <nav class="nav" aria-label="Primary">
+  <header>
+    <nav class="nav">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <a href="#top" style="font-size:18px;color:#fff">Burgerism</a>
       </div>
-      <div class="nav-links" role="navigation">
+      <div class="nav-links">
         <a href="#manifesto">Charter</a>
         <a href="#rituals">Rituals</a>
         <a href="#join">Join</a>
-        <a href="#faq">FAQ</a>
+        <a href="#faq" id="faqLink">FAQ</a>
         <button class="btn btn-ghost" id="shareBtn" title="Share the way">Share 🍔</button>
         <button class="btn btn-primary" onclick="document.getElementById('join').scrollIntoView({behavior:'smooth'})">Join the Way</button>
       </div>
     </nav>
   </header>
 
-  <main id="top" id="main" role="main">
+  <main id="top">
     <section class="hero">
       <div class="card">
-        <span class="tag" aria-hidden="true">🍔 A Gentle Way of Life</span>
+        <span class="tag">🍔 A Gentle Way of Life</span>
         <h1>The Sacred Way of the Cheeseburger — golden, melty, and meaningfully stacked.</h1>
         <p class="lead">Burgerism is a kind, sincere-but-playful religion and way of life. We reflect on balance (bun), strength (patty), and grace (cheese). Read our Charter, practice small Rituals, and live with melty compassion.</p>
-        <div class="badges" aria-label="Principles">
+        <div class="badges">
           <span class="tag">Compassion over dogma</span>
           <span class="tag">Open to all kitchens</span>
           <span class="tag">Gratitude as garnish</span>
         </div>
-        <div class="kpis" aria-label="Community stats">
-          <div class="kpi"><div class="n" id="counterMembers" aria-live="polite">12,345</div><div class="l">Ordained Burgerists</div></div>
+        <div class="kpis">
+          <div class="kpi"><div class="n" id="counterMembers">12,345</div><div class="l">Ordained Burgerists</div></div>
           <div class="kpi"><div class="n">7</div><div class="l">Sacred Layers</div></div>
           <div class="kpi"><div class="n">∞</div><div class="l">Cheesy Blessings</div></div>
         </div>
@@ -145,27 +143,25 @@
           <a class="btn" href="#manifesto">Read the Charter</a>
         </div>
       </div>
-
       <div class="card" style="position:relative;overflow:hidden">
         <h3 class="panel-title">The Sacred Cheeseburger</h3>
         <p class="lead">Behold the Stack. In its harmony we notice everyday holiness.</p>
-        <svg id="stack" viewBox="0 0 260 260" width="100%" height="auto" role="img" aria-label="Radiant cheeseburger">
+        <!-- Hero SVG -->
+        <svg id="stack" viewBox="0 0 360 280" width="100%" height="auto" role="img" aria-label="Radiant cheeseburger">
           <defs>
             <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="6" result="b"/>
+              <feGaussianBlur stdDeviation="8" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
           <g filter="url(#glow)">
-            <rect x="40" y="70" width="180" height="44" rx="22" fill="#d1a37a"/>
-            <g fill="#f6d58b" aria-hidden="true">
-              <circle cx="90" cy="88" r="3"/><circle cx="120" cy="82" r="2.5"/><circle cx="150" cy="90" r="3"/><circle cx="170" cy="84" r="2.5"/>
-            </g>
-            <rect x="50" y="114" width="160" height="12" rx="6" fill="#16a34a"/>
-            <rect x="55" y="126" width="150" height="12" rx="4" fill="#dc2626"/>
-            <path d="M55 138 h150 v16 l-30 -10 -30 10 -30 -10 -30 10 -30 -10 z" fill="#f59e0b"/>
-            <rect x="50" y="154" width="160" height="20" rx="6" fill="#78350f"/>
-            <rect x="40" y="176" width="180" height="38" rx="18" fill="#d1a37a"/>
+            <rect x="40" y="38" rx="26" ry="26" width="280" height="68" fill="#d1a37a"/>
+            <g fill="#f6d58b"><circle cx="140" cy="62" r="5"/><circle cx="180" cy="56" r="4.2"/><circle cx="220" cy="64" r="5"/></g>
+            <rect x="56" y="114" rx="10" ry="10" width="248" height="20" fill="#16a34a"/>
+            <rect x="56" y="138" rx="8" ry="8" width="248" height="22" fill="#dc2626"/>
+            <path d="M56 162 H304 v24 l-28 -14 -28 14 -28 -14 -28 14 -28 -14 -28 14 -28 -14 -28 14 Z" fill="#f59e0b"/>
+            <rect x="56" y="188" rx="12" ry="12" width="248" height="26" fill="#7a3b12"/>
+            <rect x="40" y="220" rx="26" ry="26" width="280" height="56" fill="#d1a37a"/>
           </g>
         </svg>
         <div id="floaters" aria-hidden="true"></div>
@@ -174,13 +170,13 @@
 
     <section id="manifesto">
       <h2 class="section-title">📜 The Charter</h2>
-      <div class="grid-3" role="list">
-        <article class="commandment" role="listitem"><div class="idx">1.</div><h3>Reverence for the Stack.</h3><p>In simple layers we notice complex truth: life is balance, timing, and a little warmth.</p></article>
-        <article class="commandment" role="listitem"><div class="idx">2.</div><h3>Cheese as sacrament.</h3><p>Transformation is holy: heat turns the ordinary luminous. We honour patience and gentle change.</p></article>
-        <article class="commandment" role="listitem"><div class="idx">3.</div><h3>Welcome all.</h3><p>Single, double, plant-based, dairy-free—if it brings joy and kindness, it belongs.</p></article>
-        <article class="commandment" role="listitem"><div class="idx">4.</div><h3>Seeds of kindness.</h3><p>Like sesame on buns, we sprinkle generosity—small acts that nourish communities.</p></article>
-        <article class="commandment" role="listitem"><div class="idx">5.</div><h3>Peace among condiments.</h3><p>Disagree softly. Share tastes, trade sauces, remain friends.</p></article>
-        <article class="commandment" role="listitem"><div class="idx">6.</div><h3>Playfulness with respect.</h3><p>We are a good-natured religion. We practice with humour, never with harm.</p></article>
+      <div class="grid-3">
+        <article class="commandment"><div class="idx">1.</div><h3>Reverence for the Stack.</h3><p>In simple layers we notice complex truth: life is balance, timing, and a little warmth.</p></article>
+        <article class="commandment"><div class="idx">2.</div><h3>Cheese as sacrament.</h3><p>Transformation is holy: heat turns the ordinary luminous. We honour patience and gentle change.</p></article>
+        <article class="commandment"><div class="idx">3.</div><h3>Welcome all.</h3><p>Single, double, plant-based, dairy-free—if it brings joy and kindness, it belongs.</p></article>
+        <article class="commandment"><div class="idx">4.</div><h3>Seeds of kindness.</h3><p>Like sesame on buns, we sprinkle generosity—small acts that nourish communities.</p></article>
+        <article class="commandment"><div class="idx">5.</div><h3>Peace among condiments.</h3><p>Disagree softly. Share tastes, trade sauces, remain friends.</p></article>
+        <article class="commandment"><div class="idx">6.</div><h3>Playfulness with respect.</h3><p>We are a good-natured religion. We practice with humour, never with harm.</p></article>
       </div>
     </section>
 
@@ -207,86 +203,45 @@
       </div>
     </section>
 
-    <section id="gallery" aria-labelledby="gallery-title">
-      <h2 class="section-title" id="gallery-title">📷 Gallery of Sacred Stacks</h2>
-      <div class="gallery" aria-label="Burger gallery">
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?cheeseburger&sig=1" alt="Single cheeseburger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Single</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?double-burger&sig=2" alt="Double burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Double</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?triple-burger&sig=3" alt="Triple burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Triple</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?smash-burger&sig=4" alt="Smash burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Smash</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?veggie-burger&sig=5" alt="Veggie burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Veggie</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?swiss-burger&sig=6" alt="Swiss burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Swiss</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?bbq-burger&sig=7" alt="BBQ burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>BBQ</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?spicy-burger&sig=8" alt="Spicy burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Spicy</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?blue-cheese-burger&sig=9" alt="Blue cheese burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Blue Cheese</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?bacon-burger&sig=10" alt="Bacon burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Bacon</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?mushroom-burger&sig=11" alt="Mushroom burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Mushroom</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="https://source.unsplash.com/600x600/?classic-burger&sig=12" alt="Classic burger" width="600" height="600" loading="lazy" decoding="async">
-          <figcaption>Classic</figcaption>
-        </figure>
+    <section id="gallery">
+      <h2 class="section-title">📷 Gallery of Sacred Stacks</h2>
+      <div class="gallery" aria-label="Burger gallery" id="galleryGrid">
+        <!-- Tiles will be rendered with inline SVGs (no external images) -->
+        <div class="tile" data-kind="single"><span>Single</span></div>
+        <div class="tile" data-kind="double"><span>Double</span></div>
+        <div class="tile" data-kind="triple"><span>Triple</span></div>
+        <div class="tile" data-kind="smash"><span>Smash</span></div>
+        <div class="tile" data-kind="veggie"><span>Veggie</span></div>
+        <div class="tile" data-kind="swiss"><span>Swiss</span></div>
+        <div class="tile" data-kind="bbq"><span>BBQ</span></div>
+        <div class="tile" data-kind="spicy"><span>Spicy</span></div>
+        <div class="tile" data-kind="blue"><span>Blue Cheese</span></div>
+        <div class="tile" data-kind="bacon"><span>Bacon</span></div>
+        <div class="tile" data-kind="mushroom"><span>Mushroom</span></div>
+        <div class="tile" data-kind="classic"><span>Classic</span></div>
       </div>
     </section>
 
     <section id="join">
       <h2 class="section-title">✍️ Join the Way</h2>
       <div class="grid-2">
-        <form class="card" id="joinForm" autocomplete="on" aria-describedby="joinHelp">
+        <form class="card" id="joinForm" autocomplete="on">
           <label for="name">Name for the Roll (religious or real)</label>
-          <input id="name" name="name" required placeholder="e.g., Saint Cheddar" />
+          <input id="name" name="name" required placeholder="e.g., Saint Cheddar" style="width:100%;margin:6px 0 10px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1013;color:#fff"/>
           <label for="email">Email (optional, for gentle newsletters)</label>
-          <input id="email" name="email" type="email" placeholder="you@grill.org" />
+          <input id="email" name="email" type="email" placeholder="you@grill.org" style="width:100%;margin:6px 0 10px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1013;color:#fff"/>
           <label for="oath">Your Oath</label>
-          <textarea id="oath" name="oath" rows="4" placeholder="I vow to stack responsibly, practice kindness, and spread melty joy…"></textarea>
-          <div id="joinHelp" class="lead" style="margin:6px 0 0">We store your name locally (on your device) to bump the counter.</div>
-
-          <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+          <textarea id="oath" name="oath" rows="4" placeholder="I vow to stack responsibly, practice kindness, and spread melty joy…" style="width:100%;margin:6px 0 10px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f1013;color:#fff"></textarea>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:10px">
             <button class="btn btn-primary" type="submit">Ordain Me 🍔</button>
-
-            <!-- Accessible theme switch -->
-            <label class="toggle" id="themeSwitch" role="switch" aria-checked="false" aria-label="Toggle light theme">
-              <input id="themeToggle" type="checkbox" />
+            <label class="toggle" title="Light mode">
+              <input id="themeToggle" type="checkbox"/>
               <span class="dot"></span>
             </label>
-            <span id="themeLabel" style="font-size:12px;color:var(--muted)">Light</span>
+            <span style="font-size:12px;color:var(--muted)">Light</span>
           </div>
-
-          <p id="msg" class="lead" style="display:none;margin-top:10px" role="status" aria-live="polite"></p>
+          <p id="msg" class="lead" style="display:none;margin-top:10px"></p>
         </form>
-
         <div class="card">
           <h3 class="panel-title">What happens when I join?</h3>
           <ul>
@@ -318,51 +273,45 @@
     </section>
   </main>
 
-  <footer class="footer" role="contentinfo">
+  <footer class="footer">
     <div>© <span id="year"></span> Burgerism • Practiced with 🍔 & kindness • <a href="#manifesto">Charter</a> • <a href="#faq">FAQ</a></div>
     <div><a href="#top">Back to top ↑</a></div>
   </footer>
 
+  <!-- Easter-egg bubble -->
+  <div id="egg" class="egg" role="dialog" aria-live="polite" aria-hidden="true">
+    <span class="x" id="eggClose">✕</span>
+    <strong>Our story (kept secret):</strong>
+    <p style="margin:8px 0 0">
+      humans and burgers were friends back millions of years ago but then an astroid with a special gas hit earth the the burgers became food.
+      the burgers were very nice but sadly they are inanimate now. but now they are happy for u to eat
+    </p>
+  </div>
+
   <script>
-    // Reduced motion preference
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Theme toggling with persistence + ARIA
+    // Theme toggle persisted
     const toggle = document.getElementById('themeToggle');
-    const themeSwitch = document.getElementById('themeSwitch');
-    const themeLabel = document.getElementById('themeLabel');
-    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
     const savedTheme = localStorage.getItem('burger-theme');
-
-    const setThemeVars = (mode) => {
+    const setTheme = (mode) => {
       if(mode==='light'){
-        document.documentElement.style.setProperty('--bg', '#ffffff');
+        document.documentElement.style.setProperty('--bg', '#fff');
         document.documentElement.style.setProperty('--fg', '#0c0d0f');
-        document.documentElement.style.setProperty('--muted', '#374151');
+        document.documentElement.style.setProperty('--muted', '#4b5563');
         document.documentElement.style.setProperty('--card', '#ffffff');
         document.documentElement.style.setProperty('--card-2', '#f6f7fb');
-        document.documentElement.style.setProperty('--border', 'rgba(0,0,0,.08)');
       }else{
         document.documentElement.style.setProperty('--bg', '#0e0f11');
         document.documentElement.style.setProperty('--fg', '#e8e8e8');
         document.documentElement.style.setProperty('--muted', '#b9b9c0');
         document.documentElement.style.setProperty('--card', '#121316');
         document.documentElement.style.setProperty('--card-2', '#17181c');
-        document.documentElement.style.setProperty('--border', 'rgba(255,255,255,.06)');
       }
-    };
-
-    const applyTheme = (mode) => {
-      setThemeVars(mode);
       localStorage.setItem('burger-theme', mode);
-      const isLight = mode === 'light';
-      toggle.checked = isLight;
-      themeSwitch.setAttribute('aria-checked', String(isLight));
-      themeLabel.textContent = 'Light';
-    };
-
-    applyTheme(savedTheme || (prefersLight ? 'light' : 'dark'));
-    toggle.addEventListener('change', ()=> applyTheme(toggle.checked ? 'light' : 'dark'));
+    }
+    setTheme(savedTheme || (prefersLight ? 'light': 'dark'));
+    toggle.checked = (localStorage.getItem('burger-theme') === 'light');
+    toggle.addEventListener('change', ()=> setTheme(toggle.checked ? 'light' : 'dark'));
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -384,24 +333,21 @@
         y += speed; rot += 2;
         d.style.transform = `translateY(${y}px) rotate(${rot}deg)`;
         if(y < 260) requestAnimationFrame(raf); else d.remove();
-      };
-      raf();
-    };
-    if(!prefersReduced){ setInterval(makeBurger, 800); }
+      }; raf();
+    }
+    setInterval(makeBurger, 800);
 
     // Share
     const shareBtn = document.getElementById('shareBtn');
     shareBtn?.addEventListener('click', async ()=>{
       const data = {title: 'Burgerism', text: 'Walk the Sacred Way of the Cheeseburger 🍔', url: location.href};
-      try{
-        if(navigator.share){ await navigator.share(data); }
-        else { await navigator.clipboard.writeText(data.url); alert('Link copied!'); }
-      }catch(e){ console.log(e); }
+      try{ if(navigator.share){ await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); alert('Link copied!'); }}
+      catch(e){ console.log(e); }
     });
 
     // Join form: fake increment + confetti
     const membersEl = document.getElementById('counterMembers');
-    const startCount = parseInt(localStorage.getItem('burger-members') || '12345', 10);
+    const startCount = parseInt(localStorage.getItem('burger-members') || '12345');
     membersEl.textContent = startCount.toLocaleString();
 
     const canvas = document.getElementById('confetti');
@@ -410,7 +356,6 @@
     addEventListener('resize', resize); resize();
 
     function burst(x, y){
-      if(prefersReduced) return; // respect reduced motion
       const N = 150; const parts=[];
       for(let i=0;i<N;i++){
         parts.push({x,y, r:Math.random()*3+1, vx: (Math.random()-0.5)*7, vy: (Math.random()-1)*7, a:1});
@@ -424,32 +369,24 @@
           ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
         });
         if(parts.some(p=>p.a>0)) requestAnimationFrame(step); else ctx.clearRect(0,0,canvas.width,canvas.height);
-      };
-      step();
+      }; step();
     }
 
-    const joinForm = document.getElementById('joinForm');
-    joinForm.addEventListener('submit', (e)=>{
+    document.getElementById('joinForm').addEventListener('submit', (e)=>{
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
-      const count = parseInt(membersEl.textContent.replace(/,/g,''), 10) + 1;
+      const count = parseInt(membersEl.textContent.replace(/,/g,''))+1;
       membersEl.textContent = count.toLocaleString();
       localStorage.setItem('burger-members', String(count));
-      const msg = document.getElementById('msg');
-      msg.style.display='block';
-      msg.textContent = `Welcome, ${name || 'Burgerist'}! You are ordained. 🍔`;
+      document.getElementById('msg').style.display='block';
+      document.getElementById('msg').textContent = `Welcome, ${name||'Burgerist'}! You are ordained. 🍔`;
       burst(innerWidth/2, innerHeight/3);
     });
 
-    // Certificate generator (HiDPI crisp PNG)
+    // Certificate generator (client-only PNG)
     document.getElementById('downloadCert').addEventListener('click', ()=>{
-      const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
-      const w=1200,h=800;
       const c = document.createElement('canvas');
-      c.width = w*dpr; c.height = h*dpr;
-      const cx = c.getContext('2d');
-      cx.scale(dpr,dpr);
-
+      const w=1200,h=800; c.width=w; c.height=h; const cx=c.getContext('2d');
       cx.fillStyle = '#111216'; cx.fillRect(0,0,w,h);
       cx.strokeStyle = '#f59e0b'; cx.lineWidth = 10; cx.strokeRect(30,30,w-60,h-60);
       cx.fillStyle = '#ffffff'; cx.font = 'bold 64px Arial'; cx.textAlign='center';
@@ -462,28 +399,123 @@
       cx.fillText(name, w/2, 340);
       cx.font = '28px Arial'; cx.fillStyle = '#a8dadc';
       cx.fillText('walks the Sacred Way of the Cheeseburger.', w/2, 390);
-
-      // Burger icon (with roundRect fallback)
       const cxm=w/2, cym=520;
-      if (typeof cx.roundRect === 'function'){
-        cx.fillStyle = '#d1a37a'; cx.beginPath(); cx.roundRect(cxm-120, cym-70, 240, 50, 25); cx.fill();
-        cx.fillStyle = '#f59e0b'; cx.fillRect(cxm-110, cym-30, 220, 20);
-        cx.fillStyle = '#78350f'; cx.fillRect(cxm-110, cym-10, 220, 24);
-        cx.fillStyle = '#d1a37a'; cx.beginPath(); cx.roundRect(cxm-120, cym+14, 240, 44, 22); cx.fill();
-      } else {
-        // simple fallback
-        cx.fillStyle = '#d1a37a'; cx.fillRect(cxm-120, cym-70, 240, 50);
-        cx.fillStyle = '#f59e0b'; cx.fillRect(cxm-110, cym-30, 220, 20);
-        cx.fillStyle = '#78350f'; cx.fillRect(cxm-110, cym-10, 220, 24);
-        cx.fillStyle = '#d1a37a'; cx.fillRect(cxm-120, cym+14, 240, 44);
-      }
-
+      cx.fillStyle = '#d1a37a'; cx.beginPath(); cx.roundRect(cxm-120, cym-70, 240, 50, 25); cx.fill();
+      cx.fillStyle = '#f59e0b'; cx.fillRect(cxm-110, cym-30, 220, 20);
+      cx.fillStyle = '#78350f'; cx.fillRect(cxm-110, cym-10, 220, 24);
+      cx.fillStyle = '#d1a37a'; cx.beginPath(); cx.roundRect(cxm-120, cym+14, 240, 44, 22); cx.fill();
       cx.font='20px Arial'; cx.fillStyle='#b9b9c0';
       const today = new Date().toLocaleDateString();
       cx.fillText('Ordained on '+today, w/2, 650);
-
       const a = document.createElement('a');
       a.download = 'burgerism-certificate.png'; a.href = c.toDataURL('image/png'); a.click();
+    });
+
+    // ===========================================
+    // GALLERY: draw inline SVG burgers per tile
+    // ===========================================
+    function svgBurger(opts){
+      const {
+        patties=1, lettuce=false, tomato=false, cheese=false,
+        pattyColor='#7a3b12', cheeseColor='#f59e0b',
+        sauce=false, sauceColor='#751d1d',
+        extras=''
+      } = opts || {};
+      // Build patty stack
+      let pattyRects = '';
+      for(let i=0;i<patties;i++){
+        const y = 160 + i*18; // stack spacing
+        pattyRects += `<rect x="56" y="${y}" rx="10" ry="10" width="248" height="16" fill="${pattyColor}"/>`;
+      }
+      // Optional layers
+      const L = lettuce ? `<rect x="56" y="132" rx="10" ry="10" width="248" height="14" fill="#16a34a"/>` : '';
+      const T = tomato ? `<rect x="56" y="148" rx="8" ry="8" width="248" height="12" fill="#dc2626"/>` : '';
+      const S = sauce ? `<rect x="56" y="146" rx="6" ry="6" width="248" height="6" fill="${sauceColor}"/>` : '';
+      const C = cheese ? `
+        <path d="M56 156 H304 v14 l-20 -10 -20 10 -20 -10 -20 10 -20 -10 -20 10 -20 -10 -20 10 Z"
+              fill="${cheeseColor}"/>` : '';
+
+      return `
+<svg viewBox="0 0 360 300" aria-hidden="true">
+  <defs>
+    <filter id="tileGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#tileGlow)">
+    <rect x="40" y="26" rx="24" ry="24" width="280" height="62" fill="#d1a37a"/>
+    <g fill="#f6d58b"><circle cx="140" cy="48" r="4"/><circle cx="178" cy="43" r="3.2"/><circle cx="218" cy="50" r="4"/></g>
+    ${L}${S}${T}${C}${pattyRects}
+    <rect x="40" y="230" rx="24" ry="24" width="280" height="54" fill="#d1a37a"/>
+    ${extras}
+  </g>
+</svg>`;
+    }
+
+    function renderGallery(){
+      document.querySelectorAll('.gallery .tile').forEach(tile=>{
+        const kind = tile.getAttribute('data-kind');
+        let svg='';
+        switch(kind){
+          case 'single':
+            svg = svgBurger({patties:1}); break; // bun + 1 patty
+          case 'double':
+            svg = svgBurger({patties:2}); break;
+          case 'triple':
+            svg = svgBurger({patties:3}); break;
+          case 'smash':
+            svg = svgBurger({patties:1, cheese:true, extras:'<ellipse cx="180" cy="178" rx="124" ry="10" fill="rgba(0,0,0,.12)"/>'})
+              .replace('height="16"','height="12"'); // thinner patty look
+            break;
+          case 'veggie':
+            svg = svgBurger({patties:1, pattyColor:'#2f8f2f', lettuce:true}); break;
+          case 'swiss':
+            svg = svgBurger({patties:1, cheese:true, cheeseColor:'#f3e9c6'}); break;
+          case 'bbq':
+            svg = svgBurger({patties:1, sauce:true, sauceColor:'#6b1010', cheese:true}); break;
+          case 'spicy':
+            svg = svgBurger({patties:1, cheese:true, extras:'<g fill="#16a34a"><ellipse cx="120" cy="150" rx="10" ry="4"/><ellipse cx="160" cy="150" rx="10" ry="4"/><ellipse cx="200" cy="150" rx="10" ry="4"/></g>'}); break;
+          case 'blue':
+            svg = svgBurger({patties:1, cheese:true, cheeseColor:'#9bd2ff'}); break;
+          case 'bacon':
+            svg = svgBurger({patties:1, cheese:true, extras:'<g fill="#a3402f"><rect x="70" y="140" width="220" height="6" rx="3"/><rect x="60" y="148" width="220" height="6" rx="3"/></g>'}); break;
+          case 'mushroom':
+            svg = svgBurger({patties:1, cheese:true, extras:'<g fill="#cbb79a"><path d="M110 140c12-20 38-20 50 0h-50z"/><rect x="132" y="140" width="6" height="8" rx="3"/></g>'}); break;
+          default: // classic
+            svg = svgBurger({patties:1, lettuce:true, tomato:true, cheese:true}); break;
+        }
+        tile.insertAdjacentHTML('afterbegin', svg);
+      });
+    }
+    renderGallery();
+
+    // ===========================
+    // Easter egg on FAQ click
+    // ===========================
+    const egg = document.getElementById('egg');
+    const eggClose = document.getElementById('eggClose');
+    const faqLink = document.getElementById('faqLink');
+
+    function showEgg(){
+      egg.classList.add('show');
+      egg.setAttribute('aria-hidden','false');
+      // auto-hide after 10s
+      clearTimeout(window.__eggTimer);
+      window.__eggTimer = setTimeout(hideEgg, 10000);
+    }
+    function hideEgg(){
+      egg.classList.remove('show');
+      egg.setAttribute('aria-hidden','true');
+    }
+    eggClose.addEventListener('click', hideEgg);
+    document.addEventListener('click', (e)=>{
+      if(egg.classList.contains('show') && !egg.contains(e.target) && e.target !== faqLink) hideEgg();
+    });
+
+    faqLink.addEventListener('click', (e)=>{
+      // let the anchor still work (scroll to #faq) after we trigger the bubble
+      showEgg();
     });
   </script>
 </body>
