@@ -81,17 +81,41 @@
     .toggle .dot{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:all .2s}
     .toggle input:checked + .dot{left:17px;background:gold}
 
-    /* Easter-egg bubble */
-    .egg{
-      position:fixed; right:14px; bottom:14px; max-width:340px; z-index:70;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
-      border:1px solid rgba(255,255,255,.08); color:#eaeaea; padding:14px 16px;
-      border-radius:14px; box-shadow:0 14px 50px -20px rgba(0,0,0,.6);
-      transform:translateY(10px); opacity:0; pointer-events:none; transition:.18s ease;
+    /* --- Easter-egg modal (centered) --- */
+    .egg-backdrop{
+      position:fixed; inset:0; z-index:89;
+      background:rgba(0,0,0,.55);
+      backdrop-filter:blur(3px);
+      opacity:0; pointer-events:none; transition:opacity .2s ease;
     }
-    .egg.show{transform:translateY(0); opacity:1; pointer-events:auto}
-    .egg .x{cursor:pointer; float:right; opacity:.7}
-    .egg .x:hover{opacity:1}
+    .egg-modal{
+      position:fixed; inset:0; z-index:90;
+      display:grid; place-items:center;
+      opacity:0; pointer-events:none; transition:opacity .2s ease;
+    }
+    .egg{
+      width:min(560px, calc(100vw - 40px));
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:16px; padding:18px 18px 14px;
+      color:#eaeaea;
+      box-shadow:0 30px 80px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.04) inset;
+      transform:scale(.96) translateY(10px);
+      transition:transform .18s ease, opacity .18s ease;
+      position:relative;
+    }
+    .egg h4{margin:0 28px 8px 0; font-size:18px}
+    .egg p{margin:8px 0 0; color:#cfd3da; line-height:1.55}
+    .egg .x{
+      position:absolute; top:10px; right:10px;
+      width:30px; height:30px; display:grid; place-items:center;
+      border-radius:10px; cursor:pointer;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      color:#fff;
+    }
+    .egg .x:hover{background:rgba(255,255,255,.12)}
+    .egg-modal.show, .egg-backdrop.show{opacity:1; pointer-events:auto}
+    .egg-modal.show .egg{transform:scale(1) translateY(0)}
 
     @media (max-width: 900px){
       .hero{grid-template-columns:1fr;gap:16px;padding-top:30px}
@@ -154,7 +178,7 @@
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
-          <g filter="url(#glow)">
+        <g filter="url(#glow)">
             <rect x="40" y="38" rx="26" ry="26" width="280" height="68" fill="#d1a37a"/>
             <g fill="#f6d58b"><circle cx="140" cy="62" r="5"/><circle cx="180" cy="56" r="4.2"/><circle cx="220" cy="64" r="5"/></g>
             <rect x="56" y="114" rx="10" ry="10" width="248" height="20" fill="#16a34a"/>
@@ -278,14 +302,17 @@
     <div><a href="#top">Back to top ↑</a></div>
   </footer>
 
-  <!-- Easter-egg bubble -->
-  <div id="egg" class="egg" role="dialog" aria-live="polite" aria-hidden="true">
-    <span class="x" id="eggClose">✕</span>
-    <strong>Our story (kept secret):</strong>
-    <p style="margin:8px 0 0">
-      humans and burgers were friends back millions of years ago but then an astroid with a special gas hit earth the the burgers became food.
-      the burgers were very nice but sadly they are inanimate now. but now they are happy for u to eat
-    </p>
+  <!-- Easter-egg modal -->
+  <div id="eggBackdrop" class="egg-backdrop" aria-hidden="true"></div>
+  <div id="eggModal" class="egg-modal" aria-hidden="true">
+    <div id="eggDialog" class="egg" role="dialog" aria-modal="true" aria-labelledby="eggTitle" aria-describedby="eggText">
+      <button class="x" id="eggClose" aria-label="Close">✕</button>
+      <h4 id="eggTitle">Our story (kept secret)</h4>
+      <p id="eggText">
+        humans and burgers were friends back millions of years ago but then an astroid with a special gas hit earth the the burgers became food.
+        the burgers were very nice but sadly they are inanimate now. but now they are happy for u to eat
+      </p>
+    </div>
   </div>
 
   <script>
@@ -421,19 +448,15 @@
         sauce=false, sauceColor='#751d1d',
         extras=''
       } = opts || {};
-      // Build patty stack
       let pattyRects = '';
       for(let i=0;i<patties;i++){
-        const y = 160 + i*18; // stack spacing
+        const y = 160 + i*18;
         pattyRects += `<rect x="56" y="${y}" rx="10" ry="10" width="248" height="16" fill="${pattyColor}"/>`;
       }
-      // Optional layers
       const L = lettuce ? `<rect x="56" y="132" rx="10" ry="10" width="248" height="14" fill="#16a34a"/>` : '';
       const T = tomato ? `<rect x="56" y="148" rx="8" ry="8" width="248" height="12" fill="#dc2626"/>` : '';
       const S = sauce ? `<rect x="56" y="146" rx="6" ry="6" width="248" height="6" fill="${sauceColor}"/>` : '';
-      const C = cheese ? `
-        <path d="M56 156 H304 v14 l-20 -10 -20 10 -20 -10 -20 10 -20 -10 -20 10 -20 -10 -20 10 Z"
-              fill="${cheeseColor}"/>` : '';
+      const C = cheese ? `<path d="M56 156 H304 v14 l-20 -10 -20 10 -20 -10 -20 10 -20 -10 -20 10 -20 -10 -20 10 Z" fill="${cheeseColor}"/>` : '';
 
       return `
 <svg viewBox="0 0 360 300" aria-hidden="true">
@@ -459,14 +482,14 @@
         let svg='';
         switch(kind){
           case 'single':
-            svg = svgBurger({patties:1}); break; // bun + 1 patty
+            svg = svgBurger({patties:1}); break;
           case 'double':
             svg = svgBurger({patties:2}); break;
           case 'triple':
             svg = svgBurger({patties:3}); break;
           case 'smash':
             svg = svgBurger({patties:1, cheese:true, extras:'<ellipse cx="180" cy="178" rx="124" ry="10" fill="rgba(0,0,0,.12)"/>'})
-              .replace('height="16"','height="12"'); // thinner patty look
+                    .replace('height="16"','height="12"');
             break;
           case 'veggie':
             svg = svgBurger({patties:1, pattyColor:'#2f8f2f', lettuce:true}); break;
@@ -482,7 +505,7 @@
             svg = svgBurger({patties:1, cheese:true, extras:'<g fill="#a3402f"><rect x="70" y="140" width="220" height="6" rx="3"/><rect x="60" y="148" width="220" height="6" rx="3"/></g>'}); break;
           case 'mushroom':
             svg = svgBurger({patties:1, cheese:true, extras:'<g fill="#cbb79a"><path d="M110 140c12-20 38-20 50 0h-50z"/><rect x="132" y="140" width="6" height="8" rx="3"/></g>'}); break;
-          default: // classic
+          default:
             svg = svgBurger({patties:1, lettuce:true, tomato:true, cheese:true}); break;
         }
         tile.insertAdjacentHTML('afterbegin', svg);
@@ -490,33 +513,31 @@
     }
     renderGallery();
 
-    // ===========================
-    // Easter egg on FAQ click
-    // ===========================
-    const egg = document.getElementById('egg');
-    const eggClose = document.getElementById('eggClose');
-    const faqLink = document.getElementById('faqLink');
+    // ===== Easter egg modal =====
+    const eggModal   = document.getElementById('eggModal');
+    const eggBackdrop= document.getElementById('eggBackdrop');
+    const eggClose   = document.getElementById('eggClose');
+    const faqLink    = document.getElementById('faqLink');
 
     function showEgg(){
-      egg.classList.add('show');
-      egg.setAttribute('aria-hidden','false');
-      // auto-hide after 10s
+      eggModal.classList.add('show');
+      eggBackdrop.classList.add('show');
+      eggModal.setAttribute('aria-hidden','false');
+      eggBackdrop.setAttribute('aria-hidden','false');
+      eggClose.focus();
       clearTimeout(window.__eggTimer);
       window.__eggTimer = setTimeout(hideEgg, 10000);
     }
     function hideEgg(){
-      egg.classList.remove('show');
-      egg.setAttribute('aria-hidden','true');
+      eggModal.classList.remove('show');
+      eggBackdrop.classList.remove('show');
+      eggModal.setAttribute('aria-hidden','true');
+      eggBackdrop.setAttribute('aria-hidden','true');
     }
     eggClose.addEventListener('click', hideEgg);
-    document.addEventListener('click', (e)=>{
-      if(egg.classList.contains('show') && !egg.contains(e.target) && e.target !== faqLink) hideEgg();
-    });
-
-    faqLink.addEventListener('click', (e)=>{
-      // let the anchor still work (scroll to #faq) after we trigger the bubble
-      showEgg();
-    });
+    eggBackdrop.addEventListener('click', hideEgg);
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') hideEgg(); });
+    faqLink.addEventListener('click', () => { showEgg(); });
   </script>
 </body>
 </html>
