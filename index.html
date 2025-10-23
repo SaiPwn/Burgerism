@@ -81,7 +81,7 @@
     .toggle .dot{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:all .2s}
     .toggle input:checked + .dot{left:17px;background:gold}
 
-    /* --- Centered Easter-egg modal (replaces old corner bubble) --- */
+    /* --- Centered Easter-egg modal --- */
     .egg-backdrop{
       position:fixed; inset:0; z-index:89;
       background:rgba(0,0,0,.55);
@@ -302,7 +302,7 @@
     <div><a href="#top">Back to top ↑</a></div>
   </footer>
 
-  <!-- Centered Easter-egg modal (make sure you removed any old #egg bubble) -->
+  <!-- Centered Easter-egg modal -->
   <div id="eggBackdrop" class="egg-backdrop" aria-hidden="true"></div>
   <div id="eggModal" class="egg-modal" aria-hidden="true">
     <div id="eggDialog" class="egg" role="dialog" aria-modal="true" aria-labelledby="eggTitle" aria-describedby="eggText">
@@ -316,7 +316,7 @@
   </div>
 
   <script>
-    // Theme toggle persisted
+    // ---------------- Theme toggle ----------------
     const toggle = document.getElementById('themeToggle');
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
     const savedTheme = localStorage.getItem('burger-theme');
@@ -337,13 +337,15 @@
       localStorage.setItem('burger-theme', mode);
     }
     setTheme(savedTheme || (prefersLight ? 'light': 'dark'));
-    toggle.checked = (localStorage.getItem('burger-theme') === 'light');
-    toggle.addEventListener('change', ()=> setTheme(toggle.checked ? 'light' : 'dark'));
+    if (toggle) {
+      toggle.checked = (localStorage.getItem('burger-theme') === 'light');
+      toggle.addEventListener('change', ()=> setTheme(toggle.checked ? 'light' : 'dark'));
+    }
 
-    // Year
+    // ---------------- Year ----------------
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Floating mini burgers
+    // ---------------- Floating mini burgers ----------------
     const floaters = document.getElementById('floaters');
     const makeBurger = ()=>{
       const d = document.createElement('div');
@@ -364,7 +366,7 @@
     }
     setInterval(makeBurger, 800);
 
-    // Share
+    // ---------------- Share ----------------
     const shareBtn = document.getElementById('shareBtn');
     shareBtn?.addEventListener('click', async ()=>{
       const data = {title: 'Burgerism', text: 'Walk the Sacred Way of the Cheeseburger 🍔', url: location.href};
@@ -372,11 +374,91 @@
       catch(e){ console.log(e); }
     });
 
-    // Join form: fake increment + confetti
+    // ==========================================================
+    // GLOBAL COUNTER (baseline 12,000 + remote count)
+    // Tries GetCount -> CountAPI -> fallback to localStorage
+    // ==========================================================
+    const BASELINE = 12000;                          // keeps your starting total ~12k+
+    const NS = 'burgerism';                          // namespace
+    const KEY = 'ordained';                          // key
     const membersEl = document.getElementById('counterMembers');
-    const startCount = parseInt(localStorage.getItem('burger-members') || '12345');
-    membersEl.textContent = startCount.toLocaleString();
 
+    const CounterBackends = {
+      // Get current value
+      async get() {
+        // Try GetCount
+        try {
+          const r = await fetchWithTimeout(`https://api.getcount.io/get/${NS}/${KEY}`, {mode:'cors'}, 3000);
+          if (r.ok) {
+            const j = await r.json();
+            if (typeof j.value === 'number') return j.value;
+          }
+        } catch(_) {}
+        // Try CountAPI
+        try {
+          const r = await fetchWithTimeout(`https://api.countapi.xyz/get/${NS}/${KEY}`, {mode:'cors'}, 3000);
+          if (r.ok) {
+            const j = await r.json();
+            if (typeof j.value === 'number') return j.value;
+          }
+        } catch(_) {}
+        // Fallback: local
+        const local = parseInt(localStorage.getItem('burger-members-remote') || '0', 10);
+        return isNaN(local) ? 0 : local;
+      },
+      // Increment and return new value
+      async hit() {
+        // Try GetCount
+        try {
+          const r = await fetchWithTimeout(`https://api.getcount.io/hit/${NS}/${KEY}`, {mode:'cors'}, 3000);
+          if (r.ok) {
+            const j = await r.json();
+            if (typeof j.value === 'number') {
+              localStorage.setItem('burger-members-remote', String(j.value));
+              return j.value;
+            }
+          }
+        } catch(_) {}
+        // Try CountAPI
+        try {
+          const r = await fetchWithTimeout(`https://api.countapi.xyz/hit/${NS}/${KEY}`, {mode:'cors'}, 3000);
+          if (r.ok) {
+            const j = await r.json();
+            if (typeof j.value === 'number') {
+              localStorage.setItem('burger-members-remote', String(j.value));
+              return j.value;
+            }
+          }
+        } catch(_) {}
+        // Fallback: bump local
+        const local = parseInt(localStorage.getItem('burger-members-remote') || '0', 10) + 1;
+        localStorage.setItem('burger-members-remote', String(local));
+        return local;
+      }
+    };
+
+    function format(n){ return n.toLocaleString(); }
+
+    function fetchWithTimeout(url, options, ms){
+      return Promise.race([
+        fetch(url, options),
+        new Promise((_, rej)=> setTimeout(()=>rej(new Error('timeout')), ms))
+      ]);
+    }
+
+    // Initial load of global count
+    (async ()=>{
+      try{
+        const remote = await CounterBackends.get();
+        membersEl.textContent = format(BASELINE + remote);
+      }catch(e){
+        // Safe fallback: localStorage baseline (kept for resilience)
+        const localStart = parseInt(localStorage.getItem('burger-members') || '12345', 10);
+        membersEl.textContent = format(localStart);
+      }
+    })();
+
+    // ---------------- Confetti canvas ----------------
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
     const resize = ()=> { canvas.width = innerWidth; canvas.height = innerHeight; };
@@ -399,18 +481,30 @@
       }; step();
     }
 
-    document.getElementById('joinForm').addEventListener('submit', (e)=>{
+    // ---------------- Join form + increment global counter ----------------
+    document.getElementById('joinForm').addEventListener('submit', async (e)=>{
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
-      const count = parseInt(membersEl.textContent.replace(/,/g,''))+1;
-      membersEl.textContent = count.toLocaleString();
-      localStorage.setItem('burger-members', String(count));
-      document.getElementById('msg').style.display='block';
-      document.getElementById('msg').textContent = `Welcome, ${name||'Burgerist'}! You are ordained. 🍔`;
+
+      // 1) Increment the global counter
+      let remoteVal = 0;
+      try{
+        remoteVal = await CounterBackends.hit();
+        membersEl.textContent = format(BASELINE + remoteVal);
+      }catch(_){
+        // local resilient fallback (won't be global, but keeps UX nice if offline)
+        const current = parseInt(membersEl.textContent.replace(/,/g,''), 10) + 1;
+        membersEl.textContent = format(current);
+      }
+
+      // 2) UX: show message + confetti
+      const msg = document.getElementById('msg');
+      msg.style.display='block';
+      msg.textContent = `Welcome, ${name||'Burgerist'}! You are ordained. 🍔`;
       burst(innerWidth/2, innerHeight/3);
     });
 
-    // Certificate generator (client-only PNG)
+    // ---------------- Certificate generator ----------------
     document.getElementById('downloadCert').addEventListener('click', ()=>{
       const c = document.createElement('canvas');
       const w=1200,h=800; c.width=w; c.height=h; const cx=c.getContext('2d');
@@ -513,7 +607,7 @@
     }
     renderGallery();
 
-    // ===== Centered Easter egg modal =====
+    // ---------------- Centered Easter egg modal ----------------
     const eggModal   = document.getElementById('eggModal');
     const eggBackdrop= document.getElementById('eggBackdrop');
     const eggClose   = document.getElementById('eggClose');
