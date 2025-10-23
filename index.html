@@ -81,7 +81,7 @@
     .toggle .dot{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:all .2s}
     .toggle input:checked + .dot{left:17px;background:gold}
 
-    /* --- Easter-egg modal (centered) --- */
+    /* --- Centered Easter-egg modal (replaces old corner bubble) --- */
     .egg-backdrop{
       position:fixed; inset:0; z-index:89;
       background:rgba(0,0,0,.55);
@@ -178,7 +178,7 @@
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
-        <g filter="url(#glow)">
+          <g filter="url(#glow)">
             <rect x="40" y="38" rx="26" ry="26" width="280" height="68" fill="#d1a37a"/>
             <g fill="#f6d58b"><circle cx="140" cy="62" r="5"/><circle cx="180" cy="56" r="4.2"/><circle cx="220" cy="64" r="5"/></g>
             <rect x="56" y="114" rx="10" ry="10" width="248" height="20" fill="#16a34a"/>
@@ -302,7 +302,7 @@
     <div><a href="#top">Back to top ↑</a></div>
   </footer>
 
-  <!-- Easter-egg modal -->
+  <!-- Centered Easter-egg modal (make sure you removed any old #egg bubble) -->
   <div id="eggBackdrop" class="egg-backdrop" aria-hidden="true"></div>
   <div id="eggModal" class="egg-modal" aria-hidden="true">
     <div id="eggDialog" class="egg" role="dialog" aria-modal="true" aria-labelledby="eggTitle" aria-describedby="eggText">
@@ -513,7 +513,7 @@
     }
     renderGallery();
 
-    // ===== Easter egg modal =====
+    // ===== Centered Easter egg modal =====
     const eggModal   = document.getElementById('eggModal');
     const eggBackdrop= document.getElementById('eggBackdrop');
     const eggClose   = document.getElementById('eggClose');
